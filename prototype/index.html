@@ -243,6 +243,30 @@
       line-height: 1.1;
     }
     .panel-body { padding: 20px; }
+    .mode-switch {
+      display: inline-grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 4px;
+      border: 1px solid var(--ink-200);
+      border-radius: 999px;
+      background: var(--ink-50);
+      padding: 4px;
+    }
+    .mode-switch button {
+      min-height: 34px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--ink-700);
+      padding: 0 14px;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .mode-switch button.active {
+      background: var(--ink-950);
+      color: var(--paper);
+    }
     .form-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -326,6 +350,35 @@
     .upload-list {
       display: grid;
       gap: 12px;
+    }
+    .drop-zone {
+      display: grid;
+      place-items: center;
+      min-height: 150px;
+      border: 2px dashed var(--ink-300);
+      border-radius: 18px;
+      background: var(--cream);
+      padding: 22px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .drop-zone i {
+      width: 30px;
+      height: 30px;
+      color: var(--coral-600);
+      margin: 0 auto 10px;
+    }
+    .drop-zone strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 20px;
+    }
+    .drop-zone span {
+      display: block;
+      margin-top: 6px;
+      color: var(--ink-600);
+      font-size: 13px;
+      font-weight: 600;
     }
     .upload-row {
       display: grid;
@@ -506,11 +559,43 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
     }
+    .plan-board[hidden],
+    .plan-summary[hidden] {
+      display: none;
+    }
+    .plan-summary {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      border: 1px solid var(--ink-200);
+      border-radius: 18px;
+      background: var(--cream);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .plan-summary strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 20px;
+      line-height: 1.15;
+    }
+    .plan-summary span {
+      display: block;
+      margin-top: 5px;
+      color: var(--ink-600);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .plan-summary .tag {
+      align-self: start;
+    }
     .day-card {
       border: 1px solid var(--ink-200);
       border-radius: 16px;
       background: var(--paper);
       overflow: hidden;
+      box-shadow: var(--shadow-sm);
     }
     .day-head {
       border-bottom: 1px solid var(--ink-200);
@@ -592,7 +677,7 @@
         width: min(100% - 24px, 1180px);
         padding-top: 20px;
       }
-      .form-grid, .metric-grid { grid-template-columns: 1fr; }
+      .form-grid, .metric-grid, .plan-summary { grid-template-columns: 1fr; }
       .upload-row, .topic-card, .analysis-row { grid-template-columns: 1fr; }
       .score { justify-items: start; }
     }
@@ -708,6 +793,13 @@
                 <span class="pill green">8 files</span>
               </div>
               <div class="panel-body">
+                <div class="drop-zone">
+                  <div>
+                    <i data-lucide="folder-up" aria-hidden="true"></i>
+                    <strong>Drag the course pile here</strong>
+                    <span>PDFs, slides, DOCX files, past papers, notes, and lecture links.</span>
+                  </div>
+                </div>
                 <div class="upload-list">
                   <div class="upload-row"><span class="upload-icon"><i data-lucide="file-text"></i></span><div><strong>BIO201_syllabus.pdf</strong><span>Learning outcomes and weights</span></div><span class="tag high">Loaded</span></div>
                   <div class="upload-row"><span class="upload-icon"><i data-lucide="presentation"></i></span><div><strong>Lectures 1-8 slides</strong><span>312 slides scanned</span></div><span class="tag high">Loaded</span></div>
@@ -803,17 +895,40 @@
           <div class="panel">
             <div class="panel-head">
               <div>
-                <span class="eyebrow">Planner mode</span>
+                <span class="eyebrow" id="plan-mode-label">Planner mode</span>
                 <h2>Your day-by-day protocol.</h2>
               </div>
-              <span class="pill green">Sleep protected</span>
+              <div class="mode-switch" aria-label="Study mode">
+                <button type="button" class="active" data-mode="planner">Planner</button>
+                <button type="button" data-mode="crammer">Crammer</button>
+              </div>
             </div>
             <div class="panel-body">
-              <div class="plan-board">
+              <div class="plan-summary" data-summary="planner">
+                <div>
+                  <strong>Four-day plan. Breadth first, then depth.</strong>
+                  <span>Best when you have enough time to revisit weak topics and run a timed paper.</span>
+                </div>
+                <span class="tag high">Sleep protected</span>
+              </div>
+              <div class="plan-summary" data-summary="crammer" hidden>
+                <div>
+                  <strong>Thirty-six-hour plan. Critical topics only.</strong>
+                  <span>Skips low-signal material, forces timed practice, and cuts review before sleep gets wrecked.</span>
+                </div>
+                <span class="tag critical">Crammer mode</span>
+              </div>
+              <div class="plan-board" data-plan="planner">
                 <div class="day-card"><div class="day-head"><strong>Tue</strong><span>Breadth · 3h</span></div><div class="tasks"><div class="task"><strong>Cellular respiration</strong><span>90m</span></div><div class="task"><strong>Photosynthesis</strong><span>60m</span></div><div class="task"><strong>Quick self-test</strong><span>30m</span></div></div></div>
                 <div class="day-card"><div class="day-head"><strong>Wed</strong><span>Depth · 3h</span></div><div class="tasks"><div class="task"><strong>Enzyme kinetics</strong><span>75m</span></div><div class="task"><strong>Respiration revisit</strong><span>45m</span></div><div class="task"><strong>Past paper Q1-3</strong><span>60m</span></div></div></div>
                 <div class="day-card"><div class="day-head"><strong>Thu</strong><span>Integration · 3h</span></div><div class="tasks"><div class="task"><strong>Full timed paper</strong><span>90m</span></div><div class="task"><strong>Missed question review</strong><span>60m</span></div><div class="task"><strong>Weak-topic drill</strong><span>30m</span></div></div></div>
                 <div class="day-card"><div class="day-head"><strong>Fri</strong><span>Taper · 2h</span></div><div class="tasks"><div class="task"><strong>Formula pass</strong><span>45m</span></div><div class="task"><strong>Critical skim</strong><span>45m</span></div><div class="task"><strong>Stop at 10pm</strong><span>sleep</span></div></div></div>
+              </div>
+              <div class="plan-board" data-plan="crammer" hidden>
+                <div class="day-card"><div class="day-head"><strong>Tonight</strong><span>Critical · 4h</span></div><div class="tasks"><div class="task"><strong>Cellular respiration</strong><span>100m</span></div><div class="task"><strong>Photosynthesis diagrams</strong><span>70m</span></div><div class="task"><strong>Enzyme graph drills</strong><span>70m</span></div></div></div>
+                <div class="day-card"><div class="day-head"><strong>Tomorrow</strong><span>Practice · 3h</span></div><div class="tasks"><div class="task"><strong>Timed past paper Q1-4</strong><span>90m</span></div><div class="task"><strong>Mark and repair misses</strong><span>60m</span></div><div class="task"><strong>One-page formula sheet</strong><span>30m</span></div></div></div>
+                <div class="day-card"><div class="day-head"><strong>Exam eve</strong><span>Taper · 90m</span></div><div class="tasks"><div class="task"><strong>Critical skim only</strong><span>45m</span></div><div class="task"><strong>Redo missed diagrams</strong><span>30m</span></div><div class="task"><strong>Stop at 10pm</strong><span>non-negotiable</span></div></div></div>
+                <div class="day-card"><div class="day-head"><strong>Skip</strong><span>Saved · 4h</span></div><div class="tasks"><div class="task"><strong>Bioenergetics appendix</strong><span>low signal</span></div><div class="task"><strong>Case study 7</strong><span>one-off</span></div><div class="task"><strong>End-of-chapter extras</strong><span>not worth it</span></div></div></div>
               </div>
               <div class="actions">
                 <button class="btn" data-next="ladder">Back</button>
@@ -868,6 +983,20 @@
         });
         group.appendChild(button);
       }
+    });
+
+    document.querySelectorAll('[data-mode]').forEach(button => {
+      button.addEventListener('click', () => {
+        const mode = button.dataset.mode;
+        document.querySelectorAll('[data-mode]').forEach(option => option.classList.toggle('active', option === button));
+        document.querySelectorAll('[data-plan]').forEach(plan => {
+          plan.hidden = plan.dataset.plan !== mode;
+        });
+        document.querySelectorAll('[data-summary]').forEach(summary => {
+          summary.hidden = summary.dataset.summary !== mode;
+        });
+        document.getElementById('plan-mode-label').textContent = mode === 'planner' ? 'Planner mode' : 'Crammer mode';
+      });
     });
 
     lucide.createIcons();
