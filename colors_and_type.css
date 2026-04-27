@@ -1,0 +1,248 @@
+/* ==========================================================================
+   Exam Hack - Colors & Type
+   Single source of truth for tokens.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --coral-50:  #FFF1EE;
+  --coral-100: #FFDDD5;
+  --coral-200: #FFB8A8;
+  --coral-300: #FF8C76;
+  --coral-400: #FF6A4E;
+  --coral-500: #FF4D3D;
+  --coral-600: #ED3122;
+  --coral-700: #C2210F;
+  --coral-800: #8F1708;
+  --coral-900: #5C0E03;
+
+  --ink-950: #120E0C;
+  --ink-900: #1C1714;
+  --ink-800: #2B2420;
+  --ink-700: #3E3531;
+  --ink-600: #5A4F4A;
+  --ink-500: #7A6F69;
+  --ink-400: #9A908A;
+  --ink-300: #BCB3AD;
+  --ink-200: #DCD5D0;
+  --ink-100: #EEE9E5;
+  --ink-50:  #F7F3EF;
+
+  --paper: #FFFFFF;
+  --cream: #FBF7F3;
+  --lime:   #C6F24C;
+  --violet: #6B4EFF;
+  --amber:  #FFB020;
+
+  --success: #108A5B;
+  --warning: #B7791F;
+  --danger:  var(--coral-600);
+
+  --fg-1: var(--ink-950);
+  --fg-2: var(--ink-700);
+  --fg-3: var(--ink-500);
+  --fg-inverse: var(--paper);
+
+  --bg-page: var(--ink-50);
+  --bg-surface: var(--paper);
+  --bg-raised: var(--paper);
+  --bg-sunken: var(--cream);
+  --bg-block: var(--ink-950);
+  --bg-accent: var(--coral-500);
+
+  --border-1: var(--ink-200);
+  --border-2: var(--ink-300);
+  --border-strong: var(--ink-950);
+
+  --link: var(--coral-600);
+  --focus-ring: var(--coral-500);
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body:    'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  --fs-12: 0.75rem;
+  --fs-14: 0.875rem;
+  --fs-16: 1rem;
+  --fs-18: 1.125rem;
+  --fs-20: 1.25rem;
+  --fs-24: 1.5rem;
+  --fs-30: 1.875rem;
+  --fs-36: 2.25rem;
+  --fs-48: 3rem;
+  --fs-60: 3.75rem;
+  --fs-80: 5rem;
+  --fs-96: 6rem;
+
+  --lh-tight:   1.02;
+  --lh-heading: 1.08;
+  --lh-snug:    1.25;
+  --lh-body:    1.5;
+  --lh-loose:   1.65;
+
+  --track-tight: -0.035em;
+  --track-snug:  -0.02em;
+  --track-normal: 0;
+  --track-caps:  0.08em;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-pill: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(20, 14, 12, 0.06);
+  --shadow-sm: 0 2px 6px rgba(20, 14, 12, 0.08);
+  --shadow-md: 0 8px 20px -6px rgba(20, 14, 12, 0.12), 0 2px 4px rgba(20, 14, 12, 0.06);
+  --shadow-lg: 0 24px 48px -12px rgba(20, 14, 12, 0.18), 0 4px 8px rgba(20, 14, 12, 0.06);
+  --shadow-stamp: 4px 4px 0 var(--ink-950);
+  --shadow-stamp-coral: 4px 4px 0 var(--coral-500);
+  --shadow-inner: inset 0 1px 0 rgba(255,255,255,0.6);
+
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --ease-spring: cubic-bezier(.2, 1.4, .3, 1);
+  --dur-fast: 140ms;
+  --dur-med: 240ms;
+  --dur-slow: 420ms;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-16);
+  line-height: var(--lh-body);
+  color: var(--fg-1);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.display,
+h1.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(var(--fs-48), 8vw, var(--fs-96));
+  line-height: var(--lh-tight);
+  letter-spacing: var(--track-tight);
+  color: var(--fg-1);
+  text-wrap: balance;
+  margin: 0;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(var(--fs-36), 5vw, var(--fs-60));
+  line-height: var(--lh-heading);
+  letter-spacing: var(--track-snug);
+  color: var(--fg-1);
+  text-wrap: balance;
+  margin: 0;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(var(--fs-30), 3.4vw, var(--fs-48));
+  line-height: var(--lh-heading);
+  letter-spacing: var(--track-snug);
+  color: var(--fg-1);
+  text-wrap: balance;
+  margin: 0;
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-24);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+  margin: 0;
+}
+
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-20);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  font-size: var(--fs-16);
+  line-height: var(--lh-body);
+  color: var(--fg-2);
+  text-wrap: pretty;
+}
+
+.lead {
+  font-size: var(--fs-20);
+  line-height: var(--lh-snug);
+  color: var(--fg-2);
+  text-wrap: pretty;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--fs-12);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--coral-600);
+}
+
+.meta {
+  font-size: var(--fs-14);
+  color: var(--fg-3);
+}
+
+code,
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+::selection {
+  background: var(--coral-200);
+  color: var(--ink-950);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
