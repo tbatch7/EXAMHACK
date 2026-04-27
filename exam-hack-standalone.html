@@ -259,6 +259,94 @@
       letter-spacing: -.02em;
       text-wrap: balance;
     }
+    .how-section {
+      background: var(--cream);
+      border-top: 1px solid var(--border-1);
+      border-bottom: 1px solid var(--border-1);
+    }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 44px;
+    }
+    .how-card {
+      position: relative;
+      min-height: 236px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 22px;
+      border: 1px solid var(--border-1);
+      border-radius: 18px;
+      background: var(--paper);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .how-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 5px;
+      background: var(--coral-500);
+    }
+    .how-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .how-step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 30px;
+      min-width: 42px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: var(--ink-950);
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .how-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--ink-200);
+      border-radius: 14px;
+      background: var(--ink-50);
+      color: var(--ink-950);
+    }
+    .how-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 2px;
+    }
+    .how-kicker {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--coral-600);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .how-card h3 {
+      font-size: 1.45rem;
+      line-height: 1.15;
+      letter-spacing: -.015em;
+    }
+    .how-card p {
+      margin-top: 10px;
+      color: var(--ink-700);
+      font-size: 15px;
+      line-height: 1.5;
+    }
     .steps-grid, .findings-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -355,24 +443,25 @@
     }
     .plan-day {
       display: grid;
-      grid-template-columns: 80px 1fr;
+      grid-template-columns: 104px 1fr;
       border-bottom: 1px solid var(--border-1);
     }
     .plan-day:last-child { border-bottom: 0; }
     .plan-day-label {
-      padding: 16px 12px 16px 20px;
+      padding: 16px 14px 16px 20px;
       border-right: 1px solid var(--border-1);
       display: flex;
       flex-direction: column;
       gap: 2px;
       background: var(--paper);
+      min-width: 0;
     }
     .plan-day-dow, .plan-day-num, .plan-day-theme, .plan-day-total, .plan-task-dur {
       font-family: var(--font-mono);
     }
     .plan-day-dow { font-size: 11px; font-weight: 700; letter-spacing: .04em; }
     .plan-day-num { font-size: 10px; color: var(--fg-3); letter-spacing: .04em; }
-    .plan-day-theme { margin-top: 4px; font-size: 9px; font-weight: 700; color: var(--coral-600); letter-spacing: .08em; text-transform: uppercase; }
+    .plan-day-theme { margin-top: 4px; font-size: 9px; font-weight: 700; color: var(--coral-600); letter-spacing: .03em; text-transform: uppercase; }
     .plan-day-total { margin-top: 2px; font-size: 9px; color: var(--fg-3); }
     .plan-day-tasks { padding: 12px 16px; display: flex; flex-direction: column; gap: 6px; }
     .plan-task { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
@@ -528,7 +617,7 @@
       .study-plan-inner { grid-template-columns: 1fr; gap: 40px; }
     }
     @media (max-width: 900px) {
-      .steps-grid, .findings-grid { grid-template-columns: 1fr; }
+      .steps-grid, .findings-grid, .how-grid { grid-template-columns: 1fr; }
       .showcase-inner { grid-template-columns: 1fr; gap: 40px; }
       .plan-cards { grid-template-columns: 1fr; }
     }
@@ -702,25 +791,43 @@
       </div>
     </section>
 
-    <section class="section" id="how">
+    <section class="section how-section" id="how">
       <div class="section-inner">
         <div class="eyebrow">How it works</div>
         <h2 class="section-h2">Three steps. Ninety seconds. Then you actually study.</h2>
-        <div class="steps-grid">
-          <article class="step-card">
-            <div class="step-top"><span class="step-num">01</span><i data-lucide="upload-cloud" class="step-icon" aria-hidden="true"></i></div>
-            <h3>Drop in your materials</h3>
-            <p>Syllabus, slides, textbook chapters, past papers, even lecture links. We read the pile.</p>
+        <div class="how-grid">
+          <article class="how-card">
+            <div class="how-card-top">
+              <span class="how-step">01</span>
+              <span class="how-icon"><i data-lucide="upload-cloud" aria-hidden="true"></i></span>
+            </div>
+            <div>
+              <span class="how-kicker">Input</span>
+              <h3>Drop in your materials</h3>
+              <p>Syllabus, slides, textbook chapters, past papers, even lecture links. We read the pile.</p>
+            </div>
           </article>
-          <article class="step-card">
-            <div class="step-top"><span class="step-num">02</span><i data-lucide="scan-search" class="step-icon" aria-hidden="true"></i></div>
-            <h3>We check what repeats</h3>
-            <p>Topics are cross-referenced against past exam patterns, syllabus weight, and recency.</p>
+          <article class="how-card">
+            <div class="how-card-top">
+              <span class="how-step">02</span>
+              <span class="how-icon"><i data-lucide="scan-search" aria-hidden="true"></i></span>
+            </div>
+            <div>
+              <span class="how-kicker">Scan</span>
+              <h3>We check what repeats</h3>
+              <p>Topics are cross-referenced against past exam patterns, syllabus weight, and recency.</p>
+            </div>
           </article>
-          <article class="step-card">
-            <div class="step-top"><span class="step-num">03</span><i data-lucide="target" class="step-icon" aria-hidden="true"></i></div>
-            <h3>Get your triage ladder</h3>
-            <p>A ranked list of exactly what to study. Critical first. Skim later. Skip last.</p>
+          <article class="how-card">
+            <div class="how-card-top">
+              <span class="how-step">03</span>
+              <span class="how-icon"><i data-lucide="target" aria-hidden="true"></i></span>
+            </div>
+            <div>
+              <span class="how-kicker">Output</span>
+              <h3>Get your triage ladder</h3>
+              <p>A ranked list of exactly what to study. Critical first. Skim later. Skip last.</p>
+            </div>
           </article>
         </div>
       </div>
